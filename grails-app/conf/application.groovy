@@ -15,9 +15,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/**/css/**',      access: ['permitAll']],
 	[pattern: '/**/images/**',   access: ['permitAll']],
 	[pattern: '/**/favicon.ico', access: ['permitAll']],
-	[pattern: '/api/post/**', 	 access: ['permitAll']],
-	[pattern: '/post/**', 		 access: ['permitAll']],
-	[pattern: '/api/**', 		 access: ['permitAll']],
+	[pattern: '/allUsersPost/**', 		 access: ['isAuthenticated()']],
+//	[pattern: '/api/**', 		 access: ['permitAll']],
 	[pattern: '/user/**', 		 access: ['permitAll']]
 ]
 
@@ -31,3 +30,4 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 ]
 
 grails.plugin.springsecurity.logout.postOnly = false
+grails.plugin.springsecurity.useBasicAuth = true
