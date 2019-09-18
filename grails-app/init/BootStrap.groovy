@@ -1,3 +1,4 @@
+import task.Post
 import task.Role
 import task.User
 import task.UserRole
@@ -17,9 +18,13 @@ class BootStrap {
             it.clear()
         }
 
+        new Post(message: "Message1", user: testUser).save()
+        new Post(message: "Message2", user: testUser).save()
+
         assert User.count() == 1
         assert Role.count() == 1
         assert UserRole.count() == 1
+        assert Post.count() == 2
 
     }
     def destroy = {
