@@ -6,8 +6,10 @@ class AllUsersPostController {
     def index() {
         if (params.recent == 'true') {
             def posts = Post.findAll()
-            def postsGroupByUser = posts.groupBy({post -> post.user})
-            respond posts
+            def recentPosts = posts.groupBy({ post -> post.user })
+                    .collect { it -> it.value.max{post1, post2 -> post1.id <=> post2.id }}
+                    .sort {post1, post2 -> post2.id <=> post1.id}
+            respond recentPosts
         } else {
             respond Post.findAll()
         }

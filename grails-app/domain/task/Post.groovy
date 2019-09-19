@@ -10,7 +10,4 @@ class Post implements GormEntity<Post> {
 
     static constraints = {
     }
-
-
-
 }
