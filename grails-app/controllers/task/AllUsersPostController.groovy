@@ -3,15 +3,15 @@ package task
 class AllUsersPostController {
     static responseFormats = ['json', 'xml']
 
+    def postService
+
     def index() {
         if (params.recent == 'true') {
-            def posts = Post.findAll()
-            def recentPosts = posts.groupBy({ post -> post.user })
-                    .collect { it -> it.value.max{post1, post2 -> post1.id <=> post2.id }}
-                    .sort {post1, post2 -> post2.id <=> post1.id}
-            respond recentPosts
+            respond postService.getRecentPosts()
+        } else if (params.userId) {
+            respond postService.getUsersPostsById(params.userId as Long)
         } else {
-            respond Post.findAll()
+            respond postService.getAllPosts()
         }
     }
 }

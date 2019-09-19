@@ -8,30 +8,23 @@ import net.minidev.json.JSONObject
 class PostController extends RestfulController {
     static responseFormats = ['json', 'xml']
 
-    def springSecurityService
+    def postService
 
     PostController() {
         super(Post)
     }
 
     def index() {
-        respond Post.findAllByUser(springSecurityService.currentUser)
+        respond postService.getCurrentUserPosts()
     }
 
     def create() {
         JSONObject postJson = request.JSON as JSONObject
         Post post = new Post(postJson)
-        post.user = springSecurityService.currentUser
-        post.save()
-        respond post
+        respond postService.saveCurrentUserPost(post)
     }
 
     def show() {
-        def post = Post.findByIdAndUser(params.id, springSecurityService.currentUser)
-        if (post) {
-            respond post
-        } else {
-            respond([], status: 204)
-        }
+        respond postService.getCurrentUserPostById(params.id as Long)
     }
 }
