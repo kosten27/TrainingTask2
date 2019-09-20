@@ -1,5 +1,6 @@
 package task
 
+
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.RestfulController
 
@@ -19,9 +20,10 @@ class SubscriptionController extends RestfulController {
 
     def create() {
         Long userId = request.JSON.userId as Long
-        def subscribe = subscriptionService.subscribe(userId)
-        if (subscribe == false) {
+        if (!subscriptionService.subscribe(userId)) {
             response.status = 500;
+        } else {
+            response.status = 200;
         }
     }
 }

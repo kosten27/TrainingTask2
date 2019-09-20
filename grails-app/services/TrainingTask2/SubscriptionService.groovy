@@ -1,6 +1,7 @@
 package TrainingTask2
 
 import grails.transaction.Transactional
+import task.Post
 import task.Subscription
 import task.User
 
@@ -32,7 +33,13 @@ class SubscriptionService {
 
     def getFollowingUsersForCurrentUser() {
         def currentUser = springSecurityService.currentUser
-        Subscription.findAllByUser(currentUser)
+        Subscription.findAllByUser(currentUser)*.followingUser
+    }
+
+    def getFollowingPostsForCurrentUser() {
+        List followingUsers = getFollowingUsersForCurrentUser()
+        Post.findAllByUserInList(followingUsers)
+                .sort { post1, post2 -> post2.id <=> post1.id }
     }
 
 }
