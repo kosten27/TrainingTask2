@@ -2,7 +2,6 @@ package task
 
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.RestfulController
-import net.minidev.json.JSONObject
 
 @Secured('isAuthenticated()')
 class PostController extends RestfulController {
@@ -19,8 +18,7 @@ class PostController extends RestfulController {
     }
 
     def create() {
-        JSONObject postJson = request.JSON as JSONObject
-        Post post = new Post(postJson)
+        Post post = new Post(request.JSON)
         respond postService.saveCurrentUserPost(post)
     }
 

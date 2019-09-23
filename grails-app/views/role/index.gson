@@ -1,0 +1,7 @@
+import task.Role
+
+model {
+    List<Role> roleList
+}
+
+json tmpl.role(roleList)

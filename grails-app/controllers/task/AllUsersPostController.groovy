@@ -1,9 +1,15 @@
 package task
 
-class AllUsersPostController {
+import grails.rest.RestfulController
+
+class AllUsersPostController extends RestfulController  {
     static responseFormats = ['json', 'xml']
 
     def postService
+
+    AllUsersPostController() {
+        super(Post)
+    }
 
     def index() {
         if (params.recent == 'true') {

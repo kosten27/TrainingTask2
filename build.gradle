@@ -66,6 +66,8 @@ dependencies {
     compile 'org.grails.plugins:spring-security-core:3.1.1'
     compile "org.grails.plugins:views-json:1.1.5"
 
+    compile "com.microsoft.sqlserver:sqljdbc4:4.0"
+
     runtime "org.grails.plugins:asset-pipeline"
 
     testCompile "org.grails:grails-plugin-testing"

@@ -1,0 +1,14 @@
+import task.UserRole
+
+model {
+    UserRole userRole
+}
+
+json {
+    user {
+        id userRole.user.id
+    }
+    role {
+        id userRole.role.id
+    }
+}

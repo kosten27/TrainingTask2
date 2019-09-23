@@ -1,0 +1,12 @@
+
+import task.Post
+
+model {
+    Post post
+}
+
+json {
+    id post.id
+    message post.message
+    user {id post.user.id}
+}

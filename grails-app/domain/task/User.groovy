@@ -3,10 +3,23 @@ package task
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 
+import javax.persistence.Table
+
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
 class User implements Serializable {
 
+	static transients = ['springSecurityService']
+
+	static constraints = {
+		password blank: false, password: true
+		username blank: false, unique: true
+	}
+
+	static mapping = {
+		table '\"user\"'
+		password column: '`password`'
+	}
 	private static final long serialVersionUID = 1
 
 	transient springSecurityService
@@ -34,16 +47,5 @@ class User implements Serializable {
 
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
-	}
-
-	static transients = ['springSecurityService']
-
-	static constraints = {
-		password blank: false, password: true
-		username blank: false, unique: true
-	}
-
-	static mapping = {
-		password column: '`password`'
 	}
 }

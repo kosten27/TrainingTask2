@@ -22,6 +22,7 @@ class SubscriptionController extends RestfulController {
         Long userId = request.JSON.userId as Long
         if (!subscriptionService.subscribe(userId)) {
             response.status = 500;
+//            response.sendError(500)
         } else {
             response.status = 200;
         }

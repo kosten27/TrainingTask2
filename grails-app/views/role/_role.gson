@@ -1,0 +1,10 @@
+import task.Role
+
+model {
+    Role role
+}
+
+json {
+    id role.id
+    authority role.authority
+}
