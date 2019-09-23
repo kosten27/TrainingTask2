@@ -17,7 +17,7 @@ class User implements Serializable {
 	}
 
 	static mapping = {
-		table '\"user\"'
+		table 'users'
 		password column: '`password`'
 	}
 	private static final long serialVersionUID = 1

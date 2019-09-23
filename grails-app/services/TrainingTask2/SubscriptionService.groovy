@@ -38,8 +38,12 @@ class SubscriptionService {
 
     def getFollowingPostsForCurrentUser() {
         List followingUsers = getFollowingUsersForCurrentUser()
-        Post.findAllByUserInList(followingUsers)
-                .sort { post1, post2 -> post2.id <=> post1.id }
+        if (followingUsers?.size() > 0) {
+            Post.findAllByUserInList(followingUsers)
+                    .sort { post1, post2 -> post2.id <=> post1.id }
+        } else {
+            []
+        }
     }
 
 }
