@@ -72,6 +72,11 @@ dependencies {
     compile 'org.liquibase:liquibase-core:3.3.2'
     compile 'org.grails.plugins:database-migration:2.0.0.RC1'
 
+//    compile "org.grails.plugins:jasper:1.11.0"
+    compile "org.grails.plugins:jasper:2.0.0.RC1"
+//    compile 'org.grails.plugins:jasper:2.1.0'
+//    compile 'org.grails.plugins:jasper-reports:3.2.0'
+
     runtime "org.grails.plugins:asset-pipeline"
 
     testCompile "org.grails:grails-plugin-testing"

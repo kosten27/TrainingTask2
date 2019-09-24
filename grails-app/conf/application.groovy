@@ -18,6 +18,8 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/userRole/**',	 access: ['isAuthenticated()']],
 	[pattern: '/allUsersPost/**',access: ['permitAll']],
 	[pattern: '/user/**', 		 access: ['permitAll']],
+	[pattern: '/report/**',		 access: ['permitAll']],
+	[pattern: '/jasper/**',		 access: ['permitAll']],
 	[pattern: '/role/**', 		 access: ['permitAll']]
 ]
 
@@ -32,3 +34,6 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.useBasicAuth = true
+
+//jasper.dir.reports='../src/main/webapp/reports'
+jasper.dir.reports='reports'
