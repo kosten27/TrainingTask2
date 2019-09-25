@@ -9,9 +9,9 @@
     <field name="id" class="java.lang.Long">
         <property name="com.jaspersoft.studio.field.label" value="id"/>
     </field>
-    <field name="version" class="java.lang.Long">
-        <property name="com.jaspersoft.studio.field.label" value="version"/>
-    </field>
+<!--    <field name="version" class="java.lang.Long">-->
+<!--        <property name="com.jaspersoft.studio.field.label" value="version"/>-->
+<!--    </field>-->
     <field name="message" class="java.lang.String">
         <property name="com.jaspersoft.studio.field.label" value="message"/>
     </field>

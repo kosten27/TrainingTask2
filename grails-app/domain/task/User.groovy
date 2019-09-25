@@ -6,7 +6,6 @@ import groovy.transform.ToString
 import javax.persistence.Table
 
 @EqualsAndHashCode(includes='username')
-@ToString(includes='username', includeNames=true, includePackage=false)
 class User implements Serializable {
 
 	static transients = ['springSecurityService']
@@ -47,5 +46,10 @@ class User implements Serializable {
 
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+	}
+
+	@Override
+	public String toString() {
+		return username;
 	}
 }

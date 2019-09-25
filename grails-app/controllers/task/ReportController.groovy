@@ -5,6 +5,9 @@ class ReportController {
     def reportService
 
     def index() {
-        reportService.testReport()
+    }
+
+    def create() {
+        reportService.testReport(params)
     }
 }
