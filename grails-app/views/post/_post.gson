@@ -7,6 +7,7 @@ model {
 
 json {
     id post.id
-    message post.message
+    date post.date
     user {id post.user.id}
+    message post.message
 }

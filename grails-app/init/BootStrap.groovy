@@ -3,6 +3,8 @@ import task.Role
 import task.User
 import task.UserRole
 
+import java.time.LocalDateTime
+
 class BootStrap {
 
     def init = {
@@ -17,9 +19,12 @@ class BootStrap {
 //        def user = new User(username: 'user', password: 'user')
 //        user.save()
 //
-//        new UserRole(user: admin, role: adminRole).save()
-//        new UserRole(user: admin, role: userRole).save()
-//        new UserRole(user: user, role: userRole).save()
+//        def adminWithAdminRole = new UserRole(user: admin, role: adminRole)
+//        adminWithAdminRole.save()
+//        def adminWithUserRole = new UserRole(user: admin, role: userRole)
+//        adminWithUserRole.save()
+//        def userWithUserRole = new UserRole(user: user, role: userRole)
+//        userWithUserRole.save()
 //
 ////        UserRole.create testUser, adminRole
 ////
@@ -28,9 +33,9 @@ class BootStrap {
 ////            it.clear()
 ////        }
 //
-//        new Post(message: "Message1", user: admin).save()
-//        new Post(message: "Message2", user: admin).save()
-//        new Post(message: "Message3", user: user).save()
+//        new Post(message: "Message1", user: admin, date: new Date()).save()
+//        new Post(message: "Message2", user: admin, date: new Date()).save()
+//        new Post(message: "Message3", user: user, date: new Date()).save()
 //
 //        assert User.count() == 2
 //        assert Role.count() == 2

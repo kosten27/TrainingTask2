@@ -54,6 +54,10 @@ databaseChangeLog = {
 
     changeSet(author: "Artem Kostenko", id: "create_table_user_role") {
         createTable(tableName: "user_role") {
+            column(autoIncrement: "true", name: "id", type: "BIGINT") {
+                constraints(primaryKey: "true", primaryKeyName: "user_rolePK")
+            }
+
             column(name: "user_id", type: "BIGINT") {
                 constraints(nullable: "false")
             }
@@ -74,11 +78,15 @@ databaseChangeLog = {
                 constraints(nullable: "false")
             }
 
-            column(name: "message", type: "VARCHAR(255)") {
+            column(name: "user_id", type: "BIGINT") {
                 constraints(nullable: "false")
             }
 
-            column(name: "user_id", type: "BIGINT") {
+            column(name: "date", type: "datetime") {
+                constraints(nullable: "false")
+            }
+
+            column(name: "message", type: "VARCHAR(255)") {
                 constraints(nullable: "false")
             }
         }
@@ -104,9 +112,9 @@ databaseChangeLog = {
         }
     }
 
-    changeSet(author: "Artem Kostenko", id: "add_primary_key_into_table_user_role") {
-        addPrimaryKey(columnNames: "user_id, role_id", constraintName: "user_rolePK", tableName: "user_role")
-    }
+//    changeSet(author: "Artem Kostenko", id: "add_primary_key_into_table_user_role") {
+//        addPrimaryKey(columnNames: "user_id, role_id", constraintName: "user_rolePK", tableName: "user_role")
+//    }
 
     changeSet(author: "Artem Kostenko", id: "add_unique_constraint_into_table_role") {
         addUniqueConstraint(columnNames: "authority", constraintName: "UC_ROLEAUTHORITY_COL", deferrable: "false", disabled: "false", initiallyDeferred: "false", tableName: "role")

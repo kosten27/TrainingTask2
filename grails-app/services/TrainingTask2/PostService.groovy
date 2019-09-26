@@ -32,6 +32,7 @@ class PostService {
 
     def saveCurrentUserPost(Post post) {
         post.user = springSecurityService.currentUser
+        post.date = new Date()
         post.save()
         post
     }

@@ -4,9 +4,13 @@ import org.grails.datastore.gorm.GormEntity
 
 class Post implements GormEntity<Post> {
 
-    String message
     User user
+    Date date
+    String message
 
     static constraints = {
+        user blank: false
+        date blank: false
+        message blank: false
     }
 }
