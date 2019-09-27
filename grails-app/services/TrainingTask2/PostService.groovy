@@ -12,8 +12,8 @@ class PostService {
     def getRecentPosts() {
         def posts = Post.findAll()
         def recentPosts = posts.groupBy({ post -> post.user })
-                .collect { it -> it.value.max { post1, post2 -> post1.id <=> post2.id } }
-                .sort { post1, post2 -> post2.id <=> post1.id }
+                .collect { it -> it.value.max { post1, post2 -> post1.date <=> post2.date } }
+                .sort { post1, post2 -> post2.date <=> post1.date }
         recentPosts
     }
 
