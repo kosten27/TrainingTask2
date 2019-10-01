@@ -8,40 +8,41 @@ import task.User
 class PostService {
 
     def springSecurityService
+    def userService
 
     def getRecentPosts() {
-        def posts = Post.findAll()
-        def recentPosts = posts.groupBy({ post -> post.user })
-                .collect { it -> it.value.max { post1, post2 -> post1.date <=> post2.date } }
-                .sort { post1, post2 -> post2.date <=> post1.date }
+        def posts = findAll()
+        def recentPosts = posts.groupBy({ post -> post.getUser() })
+                .collect { it -> it.value.max { post1, post2 -> post1.getDate() <=> post2.getDate() } }
+                .sort { post1, post2 -> post2.getDate() <=> post1.getDate() }
         recentPosts
     }
 
     def getUsersPostsById(Long userId) {
-        User user = User.findById(userId)
-        getUsersPosts(user)
+        User user = userService.findById(userId)
+        findAllByUser(user)
     }
 
-    def getUsersPosts(User user) {
+    def findAllByUser(User user) {
         Post.findAllByUser(user)
     }
 
-    def getAllPosts() {
+    def findAll() {
         Post.findAll()
     }
 
     def saveCurrentUserPost(Post post) {
-        post.user = springSecurityService.currentUser
-        post.date = new Date()
+        post.setUser(springSecurityService.currentUser)
+        post.setDate(new Date())
         post.save()
         post
     }
 
     def getCurrentUserPosts() {
-        getUsersPosts(springSecurityService.currentUser)
+        findAllByUser(springSecurityService.currentUser)
     }
 
-    def getCurrentUserPostById(Long postId) {
+    def findByIdAndCurrentUser(Long postId) {
         Post.findByIdAndUser(postId, springSecurityService.currentUser) ?: new ArrayList()
     }
 }

@@ -10,7 +10,7 @@ class SubscriptionService {
 
     def springSecurityService
 
-    def subscribe(Long userId) {
+    def subscribeCurrentUserToUser(Long userId) {
         def result
         User user = User.findById(userId)
         if (currentUserFollowingTo(user)) {

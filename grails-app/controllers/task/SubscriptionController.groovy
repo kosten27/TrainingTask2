@@ -20,9 +20,8 @@ class SubscriptionController extends RestfulController {
 
     def create() {
         Long userId = request.JSON.userId as Long
-        if (!subscriptionService.subscribe(userId)) {
+        if (!subscriptionService.subscribeCurrentUserToUser(userId)) {
             response.status = 500;
-//            response.sendError(500)
         } else {
             response.status = 200;
         }

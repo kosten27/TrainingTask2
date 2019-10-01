@@ -3,20 +3,19 @@ package TrainingTask2
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
-/**
- * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
- */
 @TestFor(SubscriptionService)
 class SubscriptionServiceSpec extends Specification {
 
-    def setup() {
-    }
+    void 'subscribeCurrentUserToUser must be successful'() {
+        given:
+        Long userId = 2
 
-    def cleanup() {
-    }
 
-//    void "test something"() {
-//        expect:"fix me"
-//            true == false
-//    }
+        when:
+        def subscriptionResult = service.subscribeCurrentUserToUser(userId)
+
+        then:
+        subscriptionResult
+
+    }
 }

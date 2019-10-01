@@ -17,7 +17,7 @@ class AllUsersPostController extends RestfulController  {
         } else if (params.userId) {
             respond postService.getUsersPostsById(params.userId as Long)
         } else {
-            respond postService.getAllPosts()
+            respond postService.findAll()
         }
     }
 }

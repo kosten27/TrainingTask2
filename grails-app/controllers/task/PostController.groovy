@@ -25,6 +25,6 @@ class PostController extends RestfulController {
     }
 
     def show() {
-        respond postService.getCurrentUserPostById(params.id as Long)
+        respond postService.findByIdAndCurrentUser(params.id as Long)
     }
 }
