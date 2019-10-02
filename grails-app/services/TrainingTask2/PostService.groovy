@@ -43,7 +43,7 @@ class PostService {
     }
 
     def findByIdAndCurrentUser(Long postId) {
-        Post.findByIdAndUser(postId, springSecurityService.currentUser) ?: new ArrayList()
+        Post.findByIdAndUser(postId, springSecurityService.currentUser) ?: []
     }
 
     def findAllByUserInList(List users) {
