@@ -7,6 +7,7 @@ class Subscription {
 
     static constraints = {
         user blank: false
-        user followingUser: false
+        followingUser blank: false
+        followingUser validator: {User u, Subscription s -> s.user != u}
     }
 }

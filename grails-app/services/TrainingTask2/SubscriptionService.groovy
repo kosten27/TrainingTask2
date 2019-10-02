@@ -9,13 +9,13 @@ import task.User
 class SubscriptionService {
 
     def springSecurityService
+    def userService
+    def postService
 
     def subscribeCurrentUserToUser(Long userId) {
-        def result
-        User user = User.findById(userId)
-        if (currentUserFollowingTo(user)) {
-            result = false
-        } else {
+        def result = false
+        User user = userService.findById(userId)
+        if (!currentUserFollowingTo(user)) {
             result = addSubscribe(user) ? true : false
         }
         result
@@ -28,7 +28,12 @@ class SubscriptionService {
 
     def addSubscribe(User user) {
         def currentUser = springSecurityService.currentUser
-        new Subscription(user: currentUser, followingUser: user).save()
+        def subscription = new Subscription(user: currentUser, followingUser: user)
+        saveSubscription(subscription)
+    }
+
+    def saveSubscription(Subscription subscription) {
+        subscription.save()
     }
 
     def getFollowingUsersForCurrentUser() {
@@ -39,8 +44,8 @@ class SubscriptionService {
     def getFollowingPostsForCurrentUser() {
         List followingUsers = getFollowingUsersForCurrentUser()
         if (followingUsers?.size() > 0) {
-            Post.findAllByUserInList(followingUsers)
-                    .sort { post1, post2 -> post2.id <=> post1.id }
+            postService.findAllByUserInList(followingUsers)
+                    .sort { post1, post2 -> post2.date <=> post1.date }
         } else {
             []
         }

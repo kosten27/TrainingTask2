@@ -9,6 +9,11 @@ import task.User
 @TestFor(PostService)
 class PostServiceSpec extends Specification {
 
+    void setup() {
+        service.springSecurityService = Stub(SpringSecurityService)
+        service.userService = Stub(UserService)
+    }
+
     void 'getRecentPosts returned correct result'() {
         given:
         User user1 = new User(username: 'user1')
@@ -32,10 +37,7 @@ class PostServiceSpec extends Specification {
         given:
         def userId = 1
         User user = new User(username: 'user')
-        def userService = Stub(UserService) {
-            findById(userId) >> user
-        }
-        service.userService = userService
+        service.userService.findById(userId) >> user
         Post post = Stub(Post)
         GroovyStub(Post, global: true)
         Post.findAllByUser(user) >> [post]
@@ -51,10 +53,7 @@ class PostServiceSpec extends Specification {
         given:
         User user = new User(username: 'user')
         def post = Mock(Post)
-        service.springSecurityService = Stub(SpringSecurityService)
-                {
-                    getCurrentUser() >> user
-                }
+        service.springSecurityService.getCurrentUser() >> user
 
         when:
         service.saveCurrentUserPost(post)
@@ -68,10 +67,7 @@ class PostServiceSpec extends Specification {
     void 'getCurrentUserPosts returned correct result'() {
         given:
         User user = new User(username: 'user')
-        service.springSecurityService = Stub(SpringSecurityService)
-                {
-                    getCurrentUser() >> user
-                }
+        service.springSecurityService.getCurrentUser() >> user
         Post post = Stub(Post)
         GroovyStub(Post, global: true)
         Post.findAllByUser(user) >> [post]
@@ -86,10 +82,7 @@ class PostServiceSpec extends Specification {
     void 'findByIdAndCurrentUser returned correct result'() {
         given:
         User user = new User(username: 'user')
-        service.springSecurityService = Stub(SpringSecurityService)
-                {
-                    getCurrentUser() >> user
-                }
+        service.springSecurityService.getCurrentUser() >> user
         Long postId = 1
         Post post = Mock(Post)
         GroovyStub(Post, global: true)
@@ -101,4 +94,19 @@ class PostServiceSpec extends Specification {
         then:
         userPost == post
     }
+
+//    void 'findAllByUserInList returned correct result'() {
+//        given:
+//        User user = new User(username: 'username')
+//        List<User> users = [user]
+//
+//
+//        when:
+//        service.findAllByUserInList()
+//
+//        then:
+//
+//
+//
+//    }
 }

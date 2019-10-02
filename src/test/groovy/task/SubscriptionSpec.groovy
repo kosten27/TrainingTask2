@@ -8,8 +8,8 @@ class SubscriptionSpec extends Specification {
 
     void 'Subscription must be created'() {
         when:
-        def user = new User()
-        def followingUser = new User()
+        def user = new User(username: 'user')
+        def followingUser = new User(username: 'followingUser')
         def subscription = new Subscription(user: user, followingUser: followingUser)
 
         then:
@@ -18,7 +18,7 @@ class SubscriptionSpec extends Specification {
 
     void 'User can not be blank'() {
         when:
-        def followingUser = new User()
+        def followingUser = new User(username: 'followingUser')
         def subscription = new Subscription(followingUser: followingUser)
 
         then:
@@ -27,7 +27,7 @@ class SubscriptionSpec extends Specification {
 
     void 'FollowingUser can not be blank'() {
         when:
-        def user = new User()
+        def user = new User(username: 'user')
         def subscription = new Subscription(user: user)
 
         then:
