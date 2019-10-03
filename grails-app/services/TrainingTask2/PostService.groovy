@@ -1,5 +1,6 @@
 package TrainingTask2
 
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.transaction.Transactional
 import task.Post
 import task.User
@@ -7,46 +8,46 @@ import task.User
 @Transactional
 class PostService {
 
-    def springSecurityService
-    def userService
+    SpringSecurityService springSecurityService
+    UserService userService
 
-    def getRecentPosts() {
-        def posts = findAll()
-        def recentPosts = posts.groupBy({ post -> post.getUser() })
+    List<Post> getRecentPosts() {
+        List<Post> posts = findAll()
+        List<Post> recentPosts = posts.groupBy({ post -> post.getUser() })
                 .collect { it -> it.value.max { post1, post2 -> post1.getDate() <=> post2.getDate() } }
                 .sort { post1, post2 -> post2.getDate() <=> post1.getDate() }
-        recentPosts
+        return recentPosts
     }
 
-    def getUsersPostsById(Long userId) {
+    List<Post> getUsersPostsById(Long userId) {
         User user = userService.findById(userId)
-        findAllByUser(user)
+        return findAllByUser(user)
     }
 
-    def findAllByUser(User user) {
-        Post.findAllByUser(user)
+    List<Post> findAllByUser(User user) {
+        return Post.findAllByUser(user)
     }
 
-    def findAll() {
-        Post.findAll()
+    List<Post> findAll() {
+        return Post.findAll()
     }
 
-    def saveCurrentUserPost(Post post) {
-        post.setUser(springSecurityService.currentUser)
+    Post saveCurrentUserPost(Post post) {
+        post.setUser(springSecurityService.currentUser as User)
         post.setDate(new Date())
         post.save()
-        post
+        return post
     }
 
-    def getCurrentUserPosts() {
-        findAllByUser(springSecurityService.currentUser)
+    List<Post> getCurrentUserPosts() {
+        return findAllByUser(springSecurityService.currentUser as User)
     }
 
-    def findByIdAndCurrentUser(Long postId) {
-        Post.findByIdAndUser(postId, springSecurityService.currentUser) ?: []
+    Post findByIdAndCurrentUser(Long postId) {
+        return Post.findByIdAndUser(postId, springSecurityService.currentUser as User) ?: null
     }
 
-    def findAllByUserInList(List users) {
+    List<Post> findAllByUserInList(List users) {
         Post.findAllByUserInList(users)
     }
 }

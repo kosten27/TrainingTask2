@@ -1,5 +1,6 @@
 package task
 
+import TrainingTask2.SubscriptionService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.RestfulController
 
@@ -7,7 +8,7 @@ import grails.rest.RestfulController
 class FollowingPostController extends RestfulController {
     static responseFormats = ['json', 'xml']
 
-    def subscriptionService
+    SubscriptionService subscriptionService
 
     FollowingPostController() {
         super(Post)

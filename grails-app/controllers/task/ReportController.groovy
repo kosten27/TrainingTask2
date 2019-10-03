@@ -1,8 +1,10 @@
 package task
 
+import TrainingTask2.ReportService
+
 class ReportController {
 
-    def reportService
+    ReportService reportService
 
     def index() {
     }

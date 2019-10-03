@@ -1,5 +1,6 @@
 package task
 
+import TrainingTask2.PostService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.RestfulController
 import org.grails.web.json.JSONObject
@@ -8,7 +9,7 @@ import org.grails.web.json.JSONObject
 class PostController extends RestfulController {
     static responseFormats = ['json', 'xml']
 
-    def postService
+    PostService postService
 
     PostController() {
         super(Post)

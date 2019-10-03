@@ -6,7 +6,7 @@ import task.User
 @Transactional
 class UserService {
 
-    def findById(long id) {
-        User.findById(id)
+    User findById(long id) {
+        return User.findById(id)
     }
 }

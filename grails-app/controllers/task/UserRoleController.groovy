@@ -1,14 +1,16 @@
 package task
 
+import TrainingTask2.UserRoleService
 import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.RestfulController
 import grails.transaction.Transactional
+import org.grails.web.json.JSONObject
 
 @Transactional(readOnly = true)
 class UserRoleController extends RestfulController {
     static responseFormats = ['json', 'xml']
 
-    def userRoleService
+    UserRoleService userRoleService
 
     UserRoleController() {
         super(UserRole)
@@ -21,7 +23,7 @@ class UserRoleController extends RestfulController {
 
     @Secured('ROLE_ADMIN')
     def create() {
-        UserRole userRole = new UserRole(request.JSON)
+        UserRole userRole = new UserRole(request.JSON as JSONObject)
         respond userRoleService.saveUserRole(userRole)
     }
 }

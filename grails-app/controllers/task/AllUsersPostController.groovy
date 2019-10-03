@@ -1,11 +1,12 @@
 package task
 
+import TrainingTask2.PostService
 import grails.rest.RestfulController
 
 class AllUsersPostController extends RestfulController  {
     static responseFormats = ['json', 'xml']
 
-    def postService
+    PostService postService
 
     AllUsersPostController() {
         super(Post)

@@ -1,28 +1,36 @@
 package TrainingTask2
 
+import grails.core.GrailsApplication
+import grails.plugins.jasper.JasperReportDef
+import grails.plugins.jasper.JasperService
 import grails.transaction.Transactional
+import grails.web.servlet.mvc.GrailsParameterMap
+import org.grails.web.servlet.mvc.GrailsWebRequest
 import org.grails.web.util.WebUtils
 import task.Post
+
+import javax.servlet.ServletContext
+import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 
 @Transactional
 class ReportService {
 
-    def jasperService
-    def servletContext
-    def grailsApplication
+    JasperService jasperService
+    ServletContext servletContext
+    GrailsApplication grailsApplication
 
-    def generateReportDef(params, locale, models) {
-        def reportDef = jasperService.buildReportDefinition(params, locale, models)
-        return reportDef
+    JasperReportDef generateReportDef(GrailsParameterMap params, Locale locale, Map models) {
+        return jasperService.buildReportDefinition(params, locale, models)
     }
 
-    def generateReportResponse(params, locale, models) {
+    HttpServletResponse generateReportResponse(GrailsParameterMap params, Locale locale, Map models) {
         return generateResponse(generateReportDef(params, locale, models))
     }
 
-    def generateResponse(reportDef) {
-        def webUtils = WebUtils.retrieveGrailsWebRequest()
-        def response = webUtils.getCurrentResponse()
+    HttpServletResponse generateResponse(JasperReportDef reportDef) {
+        GrailsWebRequest webUtils = WebUtils.retrieveGrailsWebRequest()
+        HttpServletResponse response = webUtils.getCurrentResponse()
         if (!reportDef.fileFormat.inline && !reportDef.parameters._inline) {
             response.setHeader("Content-Disposition", "inline; filename=\"${reportDef.parameters._name ?: reportDef.name}.${reportDef.fileFormat.extension}\"");
             response.setHeader("Content-Type", "${reportDef.fileFormat.mimeTyp}");
@@ -30,22 +38,18 @@ class ReportService {
             response.characterEncoding = "UTF-8"
             response.outputStream << reportDef.contentStream.toByteArray()
         }
+        return response
     }
 
-    def generate(params, locale, models, isDownload = false) {
-        if (isDownload) {
-            generateReportDef(params, locale, models)
-        } else {
-            generateReportResponse(params, locale, models)
-        }
+    HttpServletResponse generate(GrailsParameterMap params, Locale locale, Map models) {
+        return generateReportResponse(params, locale, models)
     }
 
-    def generateReport(params) {
-        def webUtils = WebUtils.retrieveGrailsWebRequest()
-        def request = webUtils.getCurrentRequest()
-        def result = [:]
+    HttpServletResponse generateReport(GrailsParameterMap params) {
+        GrailsWebRequest webUtils = WebUtils.retrieveGrailsWebRequest()
+        HttpServletRequest request = webUtils.getCurrentRequest()
+        Map result = [:]
         result.data = Post.findAll()
-        def isDownload = false
-        generate(params, request.getLocale(), result, isDownload)
+        return generate(params, request.getLocale(), result)
     }
 }

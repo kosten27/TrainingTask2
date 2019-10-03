@@ -6,11 +6,11 @@ import task.UserRole
 @Transactional
 class UserRoleService {
 
-    def saveUserRole(UserRole userRole) {
+    UserRole saveUserRole(UserRole userRole) {
         if (userRole.validate()) {
-            userRole.save()
+            return userRole.save()
         } else {
-            userRole.errors
+            return null
         }
     }
 }
