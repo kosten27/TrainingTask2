@@ -8,6 +8,6 @@ class ReportController {
     }
 
     def create() {
-        reportService.testReport(params)
+        reportService.generateReport(params)
     }
 }

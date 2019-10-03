@@ -15,7 +15,7 @@ class PostSpec extends Specification {
         post.validate()
     }
 
-    void 'User can not be blank'() {
+    void 'User cannot be blank'() {
         when:
         def post = new Post(message: 'message', date: new Date())
 
@@ -23,7 +23,7 @@ class PostSpec extends Specification {
         !post.validate()
     }
 
-    void 'Message can not be blank'() {
+    void 'Message cannot be blank'() {
         when:
         def user = new User(username: 'user', password: 'password')
         def postWithNullMessage = new Post(user: user, date: new Date())
@@ -34,7 +34,7 @@ class PostSpec extends Specification {
         !postWithBlankMessage.validate()
     }
 
-    void 'Date can not be null'() {
+    void 'Date cannot be null'() {
         when:
         def user = new User(username: 'user', password: 'password')
         def postWithNullDate = new Post(user: user, message: 'message')
@@ -43,7 +43,7 @@ class PostSpec extends Specification {
         !postWithNullDate.validate()
     }
 
-    void 'User and message can not be blank'() {
+    void 'User and message cannot be blank'() {
         when:
         def postWithNullUserMessageAndDate = new Post()
         User user

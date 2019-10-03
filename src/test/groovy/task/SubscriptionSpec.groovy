@@ -16,7 +16,7 @@ class SubscriptionSpec extends Specification {
         subscription.validate()
     }
 
-    void 'User can not be blank'() {
+    void 'User cannot be blank'() {
         when:
         def followingUser = new User(username: 'followingUser')
         def subscription = new Subscription(followingUser: followingUser)
@@ -25,7 +25,7 @@ class SubscriptionSpec extends Specification {
         !subscription.validate()
     }
 
-    void 'FollowingUser can not be blank'() {
+    void 'FollowingUser cannot be blank'() {
         when:
         def user = new User(username: 'user')
         def subscription = new Subscription(user: user)

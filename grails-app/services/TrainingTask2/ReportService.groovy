@@ -40,8 +40,7 @@ class ReportService {
         }
     }
 
-    def testReport(params) {
-
+    def generateReport(params) {
         def webUtils = WebUtils.retrieveGrailsWebRequest()
         def request = webUtils.getCurrentRequest()
         def result = [:]

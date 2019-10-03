@@ -35,5 +35,4 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.useBasicAuth = true
 
-//jasper.dir.reports='../src/main/webapp/reports'
 jasper.dir.reports='reports'

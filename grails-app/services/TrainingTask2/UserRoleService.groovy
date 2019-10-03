@@ -7,6 +7,10 @@ import task.UserRole
 class UserRoleService {
 
     def saveUserRole(UserRole userRole) {
-        userRole.save()
+        if (userRole.validate()) {
+            userRole.save()
+        } else {
+            userRole.errors
+        }
     }
 }

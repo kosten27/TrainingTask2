@@ -14,7 +14,7 @@ class RoleSpec extends Specification {
         role.validate()
     }
 
-    void 'Authority can not be blank'() {
+    void 'Authority cannot be blank'() {
         when:
         def roleWithNullAuthority = new Role()
         def roleWithEmptyAuthority = new Role(authority: '')

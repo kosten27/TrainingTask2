@@ -6,7 +6,7 @@ import spock.lang.Specification
 @TestFor(User)
 class UserSpec extends Specification {
 
-    void 'Username can not be blank'() {
+    void 'Username cannot be blank'() {
         when:
         def userWithNullUsername = new User(password: 'password')
         def userWithEmptyUsername = new User(username: '', password: 'password')
@@ -16,7 +16,7 @@ class UserSpec extends Specification {
         !userWithEmptyUsername.validate()
     }
 
-    void 'Password can not be blank'() {
+    void 'Password cannot be blank'() {
         when:
         def userWithNullPassword = new User(username: 'user')
         def userWithEmptyPassword = new User(username: 'user', password: '')
@@ -26,7 +26,7 @@ class UserSpec extends Specification {
         !userWithEmptyPassword.validate()
     }
 
-    void 'Username and password can not be blank'() {
+    void 'Username and password cannot be blank'() {
         when:
         def userWithNullUsernameAndPassword = new User()
         def userWithEmptyUsernameAndPassword = new User(username: '', password: '')
