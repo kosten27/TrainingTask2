@@ -87,18 +87,18 @@ dataSource:
 environments:
     development:
         dataSource:
-#            pooled: true
             dbCreate: none
             driverClassName: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-#            dialect: org.hibernate.dialect.SQLServer2008Dialect
             url: "jdbc:sqlserver://localhost:1433;DatabaseName=TrainingTaskDev"
             username: "sa"
             password: "PasswordSA123"
-#            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     test:
         dataSource:
             dbCreate: none
-            url: jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            driverClassName: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+            url: "jdbc:sqlserver://localhost:1433;DatabaseName=testDb"
+            username: "sa"
+            password: "PasswordSA123"
     production:
         dataSource:
             dbCreate: none
