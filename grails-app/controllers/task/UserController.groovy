@@ -1,6 +1,7 @@
 package task
 
 import grails.rest.RestfulController
+import org.grails.web.json.JSONObject
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -24,7 +25,7 @@ class UserController extends RestfulController {
     }
 
     def create() {
-        def user = new User(request.JSON)
+        def user = new User(request.JSON as JSONObject)
         respond user.save()
     }
 

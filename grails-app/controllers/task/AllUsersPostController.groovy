@@ -12,13 +12,18 @@ class AllUsersPostController extends RestfulController  {
         super(Post)
     }
 
-    def index() {
-        if (params.recent == 'true') {
+    def index(AllUsersPostInfo allUsersPostInfo) {
+        if (allUsersPostInfo.recent) {
             respond postService.getRecentPosts()
-        } else if (params.userId) {
-            respond postService.getUsersPostsById(params.userId as Long)
+        } else if (allUsersPostInfo.userId) {
+            respond postService.getUsersPostsById(allUsersPostInfo.userId)
         } else {
             respond postService.findAll()
         }
     }
+}
+
+class AllUsersPostInfo {
+    Boolean recent
+    Long userId
 }
