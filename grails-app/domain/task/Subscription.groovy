@@ -12,4 +12,10 @@ class Subscription {
             s.user != u
         }
     }
+
+    static mapping = {
+        table 'subscription'
+        user column: 'user_id', type: 'bigint', joinTable: 'users'
+        followingUser column: 'following_user', type: 'bigint', joinTable: 'users'
+    }
 }

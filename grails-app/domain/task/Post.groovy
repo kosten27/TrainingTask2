@@ -13,4 +13,11 @@ class Post implements GormEntity<Post> {
         date blank: false
         message blank: false
     }
+
+    static mapping = {
+        table 'post'
+        user column: 'user_id', type: 'bigint', joinTable: 'users'
+        date column: 'date', type: 'date'
+        message column: 'message', type: 'string'
+    }
 }

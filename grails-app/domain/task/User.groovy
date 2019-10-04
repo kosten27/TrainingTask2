@@ -17,7 +17,12 @@ class User implements Serializable {
 
 	static mapping = {
 		table 'users'
-		password column: '`password`'
+		username column: 'username', type: 'string'
+		password column: '`password`', type: 'string'
+		enabled column: 'enabled', type: 'boolean'
+		accountExpired column: 'account_expired', type: 'boolean'
+		accountLocked column: 'account_locked', type: 'boolean'
+		passwordExpired column: 'password_expired', type: 'boolean'
 	}
 	private static final long serialVersionUID = 1
 

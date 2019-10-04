@@ -87,6 +87,9 @@ class UserRole implements Serializable {
     }
 
     static mapping = {
+        table 'user_role'
+        user column: 'user_id', type: 'bigint', joinTable: 'users'
+        role column: 'role_id', type: 'bigint', joinTable: 'role'
         version false
     }
 }
