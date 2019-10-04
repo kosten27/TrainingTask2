@@ -126,4 +126,4 @@ grails:
     plugin:
         databasemigration:
             updateOnStart: true
-            updateOnStartFileName: changelog.groovy
+            updateOnStartFileName: changelog.xml
